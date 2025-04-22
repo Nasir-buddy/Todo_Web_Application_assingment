@@ -53,11 +53,11 @@ const Navbar = () => {
                 </div>
               </>
             ) : (
-              <div className="flex space-x-3 px-4">
+              <div className="flex space-x-3 px-4 w-fit gap-5 justify-between ">
                 <Link to="/login">
                   <Button 
                     color="secondary" 
-                    className="text-sm py-2 px-4 rounded-lg bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-medium transition-all duration-200 shadow-sm hover:shadow-md"
+                    className="text-sm  py-2 px-4 rounded-lg bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-medium transition-all duration-200 shadow-sm hover:shadow-md"
                   >
                     Login
                   </Button>
