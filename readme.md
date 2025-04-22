@@ -1,112 +1,193 @@
-A full stack web application featuring user authentication (login/registration), role base access control, and todo management functionality. The frontend will be build by using React.js with Tailwind CSS and the backend will use Express.js/Node.js with MongoDB.
+# Todo Application
+
+A full-stack todo management system with role-based authentication, built with React.js, Tailwind CSS, Node.js, Express, and MongoDB.
+
+## Features
+
+- **User Authentication**
+  - Secure registration with email validation and password hashing
+  - JWT-based login and session management
+  - Password security using bcrypt
+
+- **Role-Based Access Control**
+  - Two user roles: "user" (default) and "admin"
+  - Permission-based access to features and data
+  - Protected routes based on authentication and role
+
+- **Todo Management**
+  - Create todos with title, description, due date, and category
+  - View, edit, and delete todos based on user permissions
+  - Data association between users and their todos
+
+- **Admin Features**
+  - Admin dashboard to view all users and todos
+  - Ability to manage any user's todos
+  - User role management capabilities
+
+## Tech Stack
+
+### Frontend
+- React.js
+- Tailwind CSS
+- React Context API for state management
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB with Mongoose
+- JWT for authentication
 
 ## Project Structure 
-```
-   Test/
-├── node_modules/
-├── public/
-├── src/
-│   ├── components/
-│   │   ├── Canvas/
-│   │   │   ├── RDSCanvas.jsx
-│   │   │   └── useRDSRenderer.js
-│   │   └── Controls/
-│   │       ├── ControlPanel.jsx
-│   │       └── TestParameters.jsx
-│   ├── Results/
-│   │   ├── ResultsExport.jsx
-│   │   └── ResultsTable.jsx
-│   ├── ui/
-│   │   ├── Alert.jsx
-│   │   ├── Button.jsx
-│   │   └── Input.jsx
-│   ├── hooks/
-│   │   ├── useKeyPress.js
-│   │   └── useTestLogic.js
-│   └── utils/
-│       ├── calculations.js
-│       └── constants.js
-├── App.css
-├── App.jsx
-├── index.css
-├── main.jsx
-├── .gitignore
-├── .eslint.config.js
-├── index.html
-└── package-lock.json
+/
+├── client/                 # Frontend application
+│   ├── node_modules/       # Frontend dependencies
+│   ├── public/             # Static public assets
+│   ├── src/                # Source code
+│   │   ├── assets/         # Images, fonts, etc.
+│   │   ├── component/      # Shared UI components
+│   │   ├── components/     # Reusable UI components
+│   │   │   ├── Button.jsx
+│   │   │   ├── Input.jsx
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── TodoCard.jsx
+│   │   │   └── TodoForm.jsx
+│   │   ├── context/        # React Context providers
+│   │   │   ├── AdminContext.jsx
+│   │   │   ├── AuthContext.jsx
+│   │   │   └── TodoContext.jsx
+│   │   └── pages/          # Page components
+│   │       ├── AdminDashboard.jsx
+│   │       ├── Auth.jsx
+│   │       ├── Login.jsx
+│   │       ├── Register.jsx
+│   │       ├── TodoList.jsx
+│   │       └── App.jsx     # Main application component
+│   ├── index.css           # Global CSS styles
+│   ├── main.jsx            # Application entry point
+│   ├── .gitignore          # Git ignore file
+│   ├── eslint.config.js    # ESLint configuration
+│   ├── index.html          # HTML entry point
+│   ├── package-lock.json   # Dependency lock file
+│   ├── package.json        # Frontend package configuration
+│   ├── README.md           # Frontend documentation
+│   ├── tailwind.config.js  # Tailwind CSS configuration
+│   └── vite.config.js      # Vite bundler configuration
+│
+└── server/                 # Backend server
+    ├── db/                 # Database-related files
+    ├── models/             # Data models
+    │   ├── todo.js         # Todo model
+    │   └── User.js         # User model
+    ├── node_modules/       # Backend dependencies
+    ├── middleware/         # Express middleware
+    ├── routes/             # API routes
+    │   ├── adminRoutes.js  # Admin-specific routes
+    │   ├── authRoutes.js   # Authentication routes
+    │   ├── todoRoutes.js   # Todo CRUD routes
+    │   └── userRoutes.js   # User-related routes
+    ├── app.js              # Express application setup
+    ├── package-lock.json   # Dependency lock file
+    ├── package.json        # Backend package configuration
+    └── .gitignore          # Git ignore file
 
-```
-
-## Objective
-
-The goal of this project is to develop a software-based Random Dot Stereogram (RDS) solution that measures fusional vergence ranges by presenting red and blue dot disparities. The software will measure the disparity in arc seconds and detect the break point (where fusion is lost) and recovery point (where fusion is regained).
-
-## Key Features and Requirements
-
-1. **Random Dot Stereogram (RDS) Generation:**
-   - Create red and blue dot images with precise disparity control.
-   - Adjust disparity dynamically to assess fusional vergence limits.
-
-2. **Disparity Measurement:**
-   - Disparity should be quantified in arc seconds to ensure high precision.
-   - Support both convergence and divergence testing.
-
-3. **Break and Recovery Point Detection:**
-   - Identify the disparity value at which fusion breaks.
-   - Detect the point at which fusion is regained after break.
-
-4. **User Interaction and Testing Workflow:**
-   - Provide a method for users to respond to stimuli (e.g., keyboard/mouse input).
-   - Record user responses to determine break and recovery points.
-
-5. **Data Logging and Analysis:**
-   - Store test results for analysis and comparison.
-   - Optionally, generate reports for clinical or research use.
-
-## Technologies Used
-
-- **JavaScript**
-- **React.js**
-- **HTML**
-- **CSS**
-
-## Getting Started
+    ## Installation and Setup
 
 ### Prerequisites
+- Node.js (v14.x or later)
+- npm or yarn
+- MongoDB
 
-Make sure you have the following installed:
-
-- Node.js
-- npm (Node Package Manager)
-
-### Installation
-
-1. Clone the repository:
-
-    ```bash
-    git clone https://github.com/Nasir-buddy/RDS-Management.git
-    cd RDS-Management
-    ```
+### Backend Setup
+1. Navigate to the server directory:
+   ```bash
+   cd server
+   ```
 
 2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-    ```bash
-    npm install
-    ```
+3. Install nodemon for development:
+   ```bash
+   npm install -g nodemon
+   # or as a dev dependency
+   npm install --save-dev nodemon
+   ```
 
-3. Start the development server:
+4. Create a `.env` file with the following variables:
+   ```
+   PORT=5000
+   MONGODB_URI=mongodb://localhost:27017/todo-app
+   JWT_SECRET=your_jwt_secret_key
+   ```
 
-    ```bash
-    npm start
-    ```
+5. Start the server with nodemon:
+   ```bash
+   # If installed globally
+   nodemon app.js
+   
+   # If installed as dev dependency
+   npx nodemon app.js
+   
+   # Or using the script from package.json
+   npm run dev
+   ```
+
+### Frontend Setup
+1. Navigate to the client directory:
+   ```bash
+   cd client
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file with the backend URL:
+   ```
+   REACT_APP_API_URL=http://localhost:5000/api
+   ```
+
+4. Start the React development server:
+   ```bash
+   npm start
+   ```
+
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - Register a new user
+- `POST /api/auth/login` - Login and receive JWT
+
+### Todos
+- `GET /api/todos` - Get todos (user: own todos, admin: all todos)
+- `POST /api/todos` - Create a new todo
+- `PUT /api/todos/:id` - Update a todo
+- `DELETE /api/todos/:id` - Delete a todo
+
+### Admin Routes
+- `GET /api/admin/users` - Get all users (admin only)
+- `GET /api/admin/todos` - Get all todos (admin only)
+- `PATCH /api/admin/users/:id/role` - Update user role (admin only)
 
 ## Usage
 
-After starting the development server, open your web browser and navigate to `http://localhost:3000  || or any available port will automatically select by the compiler` to access the application.
+After starting both servers:
+1. Register a new account
+2. Login with your credentials
+3. Create, view, edit, and delete todos
+4. Admin users can access the admin dashboard to manage all todos and users
 
 ## Contributing
 
-We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) for more information.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## Author
-- Nasir Ali
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
