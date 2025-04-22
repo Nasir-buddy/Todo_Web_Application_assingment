@@ -8,7 +8,6 @@ const { body, validationResult } = require('express-validator');
 router.use(authenticate);
 
 // Get todos
-// - Regular users get only their todos
 // - Admins can get all todos with a query parameter
 router.get('/', async (req, res) => {
     try {
