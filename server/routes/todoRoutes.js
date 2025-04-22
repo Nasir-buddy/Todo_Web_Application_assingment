@@ -33,7 +33,9 @@ router.post('/', [
     body('description').optional().isLength({ max: 500 })
         .withMessage('Description cannot exceed 500 characters'),
     body('category').optional().isIn(['Urgent', 'Non-Urgent'])
-        .withMessage('Category must be either Urgent or Non-Urgent')
+        .withMessage('Category must be either Urgent or Non-Urgent'),
+    body('status').optional().isIn(['pending', 'in-progress', 'completed'])
+        .withMessage('Status must be pending, in-progress, or completed')
 ], async (req, res) => {
     try {
         // Validate input
@@ -42,7 +44,7 @@ router.post('/', [
             return res.status(400).json({ errors: errors.array() });
         }
 
-        const { title, description, dueDate, category } = req.body;
+        const { title, description, dueDate, category, status } = req.body;
 
         // Create new todo
         const todo = await Todo.create({
@@ -50,6 +52,7 @@ router.post('/', [
             description,
             dueDate,
             category,
+            status: status || 'pending',
             user: req.user._id
         });
 
@@ -66,7 +69,9 @@ router.put('/:id', [
     body('description').optional().isLength({ max: 500 })
         .withMessage('Description cannot exceed 500 characters'),
     body('category').optional().isIn(['Urgent', 'Non-Urgent'])
-        .withMessage('Category must be either Urgent or Non-Urgent')
+        .withMessage('Category must be either Urgent or Non-Urgent'),
+    body('status').optional().isIn(['pending', 'in-progress', 'completed'])
+        .withMessage('Status must be pending, in-progress, or completed')
 ], async (req, res) => {
     try {
         // Validate input
@@ -87,18 +92,23 @@ router.put('/:id', [
         }
 
         // Update todo
-        const { title, description, dueDate, category, completed } = req.body;
+        const { title, description, dueDate, category, completed, status } = req.body;
+        
+        console.log('Updating todo with data:', req.body);
         
         if (title) todo.title = title;
         if (description !== undefined) todo.description = description;
         if (dueDate) todo.dueDate = dueDate;
         if (category) todo.category = category;
         if (completed !== undefined) todo.completed = completed;
+        if (status) todo.status = status;
 
         await todo.save();
         
+        console.log('Updated todo:', todo);
         res.json(todo);
     } catch (error) {
+        console.error('Error updating todo:', error);
         res.status(400).json({ message: error.message });
     }
 });

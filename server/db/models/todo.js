@@ -20,6 +20,11 @@ const TodoSchema = new mongoose.Schema({
         enum: ['Urgent', 'Non-Urgent'],
         default: 'Non-Urgent'
     },
+    status: {
+        type: String,
+        enum: ['pending', 'in-progress', 'completed'],
+        default: 'pending'
+    },
     completed: {
         type: Boolean,
         default: false
