@@ -117,7 +117,7 @@ A full-stack todo management system with role-based authentication, built with R
 
 4. Create a `.env` file with the following variables:
    ```
-   PORT=5000
+   PORT=3000
    MONGODB_URI=mongodb://localhost:27017/todo-app
    JWT_SECRET=your_jwt_secret_key
    ```
