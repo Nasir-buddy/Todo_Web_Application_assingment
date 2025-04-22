@@ -29,7 +29,7 @@ const Home = () => {
 
 function AppContent() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="h-screen w-full bg-gray-50">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

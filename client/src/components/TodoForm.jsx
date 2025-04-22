@@ -89,9 +89,9 @@ const TodoForm = ({ todo, onComplete }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='mb-10' onSubmit={handleSubmit}>
       {errors.general && (
-        <div className="bg-red-50 text-red-600 p-3 rounded-md mb-4">
+        <div className="bg-red-50 text-red-600 p-3 rounded-md mb-10">
           {errors.general}
         </div>
       )}

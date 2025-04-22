@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import Button from './Button';
 
 const Navbar = () => {
-  const { user, logout, isAdmin: userIsAdmin } = useContext(AuthContext);
+  const { user, logout, isAdmin } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -13,50 +13,63 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md">
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex justify-between items-center">
-          <Link to="/" className="text-xl font-bold text-blue-600">
-            TodoApp
-          </Link>
+    <nav className="bg-white shadow-lg">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex p-10 justify-between h-16">
+          <div className="flex items-center">
+            <Link to="/" className="flex items-center">
+              <span className="text-2xl font-bold text-indigo-600 ml-10">TodoApp</span>
+            </Link>
+          </div>
 
           <div className="flex items-center space-x-4">
             {user ? (
               <>
-                <span className="text-gray-700">
-                  Welcome, <span className="font-medium">{user.username}</span>
-                  {userIsAdmin() && <span className="ml-1 text-xs text-blue-600">(Admin)</span>}
-                </span>
-                
-                <Link to="/todos" className="text-gray-600 hover:text-blue-600">
+                <Link
+                  to="/todos"
+                  className="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
                   My Todos
                 </Link>
-                
-                {userIsAdmin() && (
-                  <Link to="/admin" className="text-gray-600 hover:text-blue-600">
-                    Admin Dashboard
+                {isAdmin() && (
+                  <Link
+                    to="/admin"
+                    className="text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                  >
+                    Admin
                   </Link>
                 )}
-                
-                <Button
-                  color="secondary"
-                  onClick={handleLogout}
-                  className="text-sm"
-                >
-                  Logout
-                </Button>
+                <div className="flex items-center space-x-3">
+                  <span className="text-gray-700 text-sm">
+                    Welcome, {user.username}!
+                  </span>
+                  <Button
+                    onClick={handleLogout}
+                    color="secondary"
+                    className="text-sm py-1.5"
+                  >
+                    Logout
+                  </Button>
+                </div>
               </>
             ) : (
-              <>
-                <Link to="/login" className="text-gray-600 hover:text-blue-600">
-                  Login
+              <div className="flex space-x-3 px-4">
+                <Link to="/login">
+                  <Button 
+                    color="secondary" 
+                    className="text-sm py-2 px-4 rounded-lg bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-medium transition-all duration-200 shadow-sm hover:shadow-md"
+                  >
+                    Login
+                  </Button>
                 </Link>
                 <Link to="/register">
-                  <Button color="primary" className="text-sm">
+                  <Button 
+                    className="text-sm py-2 px-4 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition-all duration-200 shadow-sm hover:shadow-md"
+                  >
                     Register
                   </Button>
                 </Link>
-              </>
+              </div>
             )}
           </div>
         </div>
@@ -65,4 +78,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar; 
+export default Navbar;
