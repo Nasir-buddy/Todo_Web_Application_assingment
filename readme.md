@@ -36,15 +36,15 @@ A full-stack todo management system with role-based authentication, built with R
 - Express.js
 - MongoDB with Mongoose
 - JWT for authentication
+## Project Structure
 
-## Project Structure 
+```
 /
 ├── client/                 # Frontend application
 │   ├── node_modules/       # Frontend dependencies
 │   ├── public/             # Static public assets
 │   ├── src/                # Source code
 │   │   ├── assets/         # Images, fonts, etc.
-│   │   ├── component/      # Shared UI components
 │   │   ├── components/     # Reusable UI components
 │   │   │   ├── Button.jsx
 │   │   │   ├── Input.jsx
@@ -76,7 +76,7 @@ A full-stack todo management system with role-based authentication, built with R
 └── server/                 # Backend server
     ├── db/                 # Database-related files
     ├── models/             # Data models
-    │   ├── todo.js         # Todo model
+    │   ├── Todo.js         # Todo model
     │   └── User.js         # User model
     ├── node_modules/       # Backend dependencies
     ├── middleware/         # Express middleware
@@ -89,8 +89,8 @@ A full-stack todo management system with role-based authentication, built with R
     ├── package-lock.json   # Dependency lock file
     ├── package.json        # Backend package configuration
     └── .gitignore          # Git ignore file
-
-    ## Installation and Setup
+```
+## Installation and Setup
 
 ### Prerequisites
 - Node.js (v14.x or later)
