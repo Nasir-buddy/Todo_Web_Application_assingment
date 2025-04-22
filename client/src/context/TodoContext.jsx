@@ -62,12 +62,18 @@ export const TodoProvider = ({ children }) => {
     try {
       setLoading(true);
       setError(null);
+      console.log(`Sending update request for todo ${id} with data:`, todoData);
+      
       const response = await axios.put(`http://localhost:3000/api/todos/${id}`, todoData);
+      console.log('Server response:', response.data);
       
       // Update local state
-      setTodos(todos.map(todo => 
-        todo._id === id ? response.data : todo
-      ));
+      const updatedTodos = todos.map(todo => 
+        todo._id === id ? {...todo, ...todoData} : todo
+      );
+      
+      setTodos(updatedTodos);
+      console.log('Updated todos state:', updatedTodos);
       
       setLoading(false);
       return { success: true, todo: response.data };
@@ -75,6 +81,7 @@ export const TodoProvider = ({ children }) => {
       setLoading(false);
       const message = err.response?.data?.message || 'Failed to update todo';
       setError(message);
+      console.error('Update error:', err);
       return { success: false, message };
     }
   };
@@ -106,7 +113,8 @@ export const TodoProvider = ({ children }) => {
       if (!todo) return { success: false, message: 'Todo not found' };
       
       return await updateTodo(id, { completed: !completed });
-    } catch (err) {
+    } catch (error) {
+      console.error('Error toggling todo status:', error);
       return { success: false, message: 'Failed to toggle todo status' };
     }
   };
